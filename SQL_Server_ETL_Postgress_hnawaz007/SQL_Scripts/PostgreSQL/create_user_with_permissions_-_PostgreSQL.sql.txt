@@ -1,0 +1,14 @@
+--create etl user
+CREATE USER etl WITH PASSWORD 'demopass';
+
+
+-- If it is Postgres 15
+GRANT ALL ON DATABASE "AdventureWorks" TO etl;
+ALTER DATABASE "AdventureWorks" OWNER TO etl;
+-- https://stackoverflow.com/questions/74110708/postgres-15-permission-denied-for-schema-public
+
+
+--grant connect
+--GRANT CONNECT ON DATABASE "AdventureWorks" TO etl;
+--grant table permissions
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO etl;
